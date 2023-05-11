@@ -53,9 +53,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-body {
-	line-height: 1;
-}
 section {
 	margin-block: 6em;
 }
@@ -279,7 +276,6 @@ footer {
 	align-items: center;
 }
 footer div {
-
 	position: relative;
 }
 .footer-logo {
@@ -291,7 +287,6 @@ footer div {
 	margin-bottom: 1em;
 	font-weight: 700;
 	font-size: 16px;
-
 }
 
 @media all and (max-width: 1250px) {
