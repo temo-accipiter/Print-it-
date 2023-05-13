@@ -27,16 +27,36 @@ let currentSlideIndex = 0;
 
 function arrowRight() {
 	currentSlideIndex++;
+	if (currentSlideIndex > slides.length - 1) {  // Loop
+		currentSlideIndex = 0;
+	}
+	slideRight();
+}
+function slideRight(){
 	mainImg.src = slides[currentSlideIndex].image
 	mainTagline.innerHTML = slides[currentSlideIndex].tagLine;
+	dots.forEach(dot => dot.classList.remove('dot_selected'));
 	dots[currentSlideIndex].classList.add('dot_selected');
 }
 
 /* Left Arrow */
 document.querySelector('.arrow_left').addEventListener('click', arrowLeft)
+
 function arrowLeft() {
-	currentSlideIndex--;
+	currentSlideIndex--; // Decrement the slide index
+	if (currentSlideIndex < 0) {
+		currentSlideIndex = slides.length - 1;
+	}
+	slideLeft(); // Update the slide content
+};
+
+function slideLeft() {
 	mainImg.src = slides[currentSlideIndex].image;
 	mainTagline.innerHTML = slides[currentSlideIndex].tagLine;
+
+	// Remove the 'dot_selected' class from all dots
+	dots.forEach(dot => dot.classList.remove('dot_selected'));
+
+	// Add the 'dot_selected' class to the current dot
 	dots[currentSlideIndex].classList.add('dot_selected');
 }
