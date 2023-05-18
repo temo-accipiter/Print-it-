@@ -17,46 +17,29 @@ const slides = [
 	}
 ]
 
-const mainImg = document.querySelector('.banner-img')
-const mainTagline = document.querySelector('.main_tagline')
-const dots = document.querySelectorAll('.dot');
+let currentSlideIndex = 0
 
-document.querySelector('.arrow_right').addEventListener('click', arrowRight)
+function slideUpdate(){
+	document.querySelector('.banner-img').src = slides[currentSlideIndex].image;
+	document.querySelector('.main_tagline').innerHTML = slides[currentSlideIndex].tagLine;
+	document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('dot_selected'));
+	document.querySelectorAll('.dot')[currentSlideIndex].classList.add('dot_selected');
+}
 
-let currentSlideIndex = 0;
-
-function arrowRight() {
+/*** Right Arrow ***/
+document.querySelector('.arrow_right').addEventListener('click', () => {
 	currentSlideIndex++;
 	if (currentSlideIndex > slides.length - 1) {  // Loop
 		currentSlideIndex = 0;
 	}
-	slideRight();
-}
-function slideRight(){
-	mainImg.src = slides[currentSlideIndex].image
-	mainTagline.innerHTML = slides[currentSlideIndex].tagLine;
-	dots.forEach(dot => dot.classList.remove('dot_selected'));
-	dots[currentSlideIndex].classList.add('dot_selected');
-}
+	slideUpdate();       // Update the slide content
+})
 
-/* Left Arrow */
-document.querySelector('.arrow_left').addEventListener('click', arrowLeft)
-
-function arrowLeft() {
+/*** Left Arrow ***/
+document.querySelector('.arrow_left').addEventListener('click', () => {
 	currentSlideIndex--; // Decrement the slide index
 	if (currentSlideIndex < 0) {
 		currentSlideIndex = slides.length - 1;
 	}
-	slideLeft(); // Update the slide content
-};
-
-function slideLeft() {
-	mainImg.src = slides[currentSlideIndex].image;
-	mainTagline.innerHTML = slides[currentSlideIndex].tagLine;
-
-	// Remove the 'dot_selected' class from all dots
-	dots.forEach(dot => dot.classList.remove('dot_selected'));
-
-	// Add the 'dot_selected' class to the current dot
-	dots[currentSlideIndex].classList.add('dot_selected');
-}
+	slideUpdate(); 
+})
